@@ -1,8 +1,5 @@
-import Image from 'next/image'
 import {connectDB} from "@/util/database";
-import Link from "next/link";
-import {ObjectId} from "mongodb";
-import DetailLink from "@/app/list/detailLink";
+import Item from "@/app/list/item";
 
 export default async function List() {
     const client = await connectDB;
@@ -14,13 +11,7 @@ export default async function List() {
             {
                 result.map((v, i) => {
                     return (
-                        <div className="list-item" >
-                            <DetailLink url={'/detail/' + result[i]?._id} />
-                            {/*<Link href={'/detail/' + result[i]?._id}>*/}
-                                <h4>{result[i]?.title}</h4>
-                            {/*</Link>*/}
-                            <p>11.</p>
-                        </div>
+                        <Item result={result[i]} i={i}/>
                     )
                 })
             }

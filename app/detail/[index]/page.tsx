@@ -3,7 +3,7 @@ import {connectDB} from "@/util/database";
 import {ObjectId} from "mongodb";
 import DetailLink from "@/app/list/detailLink";
 
-export default async function Detail(props) {
+export default async function Detail(props: any) {
 
     const client = await connectDB;
     const db = client.db("forum")
@@ -14,7 +14,7 @@ export default async function Detail(props) {
             <h4>상세 페이지</h4>
             <h4>{result.title}</h4>
             <p>{result.content}</p>
-            <DetailLink url={'/write/' + props.params.index}/>
+            <DetailLink url={'/write/' + props.params.index} name={'수정'}/>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import {connectDB} from "@/util/database";
 import {ObjectId} from "mongodb";
 
-export default async function Modify(props) {
+export default async function Modify(props: any) {
 
     const client = await connectDB;
     const db = client.db("forum")

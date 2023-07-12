@@ -3,21 +3,25 @@
 import DetailLink from "@/app/list/detailLink";
 import {useEffect} from "react";
 
-const deleteFuc = (id: string) => {
-    const formDate = new FormData();
-    formDate.append('_id', id);
-    fetch('/api/delete', {method: 'DELETE', body: formDate}).then((res) => {
-        console.log(res);
+const deleteFuc = (id: string, e: any) => {
+    fetch('/api/delete', {method: 'DELETE', body: id}).then((res) => {
+        console.log('삭제 완료', res)
+        return res.json()
+    }).then((res) => {
+        e.target.parentElement.style.opacity = 0;
+        console.log(res)
     })
+
+    // fetch('/api/test?name=dg&age=35')
 }
 
-const Item = ({result}) => {
+const Item = ({result}:any) => {
     return (
         <div className="list-item" >
             <DetailLink url={'/detail/' + result._id} name='상세'/>
             <h4>{result.title}</h4>
             <p>{'2023.07.07'}</p>
-            <button onClick={() => {deleteFuc(result._id)}}>삭제</button>
+            <button onClick={(e) => {deleteFuc(result._id, e)}}>삭제</button>
         </div>
     )
 }

@@ -5,9 +5,11 @@ import {ObjectId} from "mongodb";
 export default async function handler(req: any, res: any) {
     if (req.method == 'DELETE') {
         try {
+            console.log(req.body);
             let db = (await connectDB).db('forum')
-            let result = db.collection('post').deleteOne({"_id" : new ObjectId(req._id)})
-            console.log(result);
+            let result = await db.collection('post').deleteOne({"_id" : new ObjectId(req.body)})
+            // console.log('result', result)
+            res.status(200).json('삭제완료');
         } catch (err) {
             console.error('error', err);
             res.status(500);
